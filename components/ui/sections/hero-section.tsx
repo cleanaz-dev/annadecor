@@ -6,6 +6,9 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, Home, Star } from 'lucide-react';
 import { MdTouchApp } from "react-icons/md";
+import Image from 'next/image';
+import HeroImage1 from "@/public/images/hero-1.png"
+import HeroImage2 from "@/public/images/hero-2.png"
 
 const HeroSection = () => {
   const [isTransformed, setIsTransformed] = useState(false);
@@ -92,21 +95,23 @@ const HeroSection = () => {
               onClick={() => setIsTransformed(!isTransformed)}
             >
             {/* Base Image (Calm Luxury) */}
-              <img
-                src="/images/hero-1.png"
+              <Image
+                src={HeroImage1}
                 alt="Calm luxury interior design"
                 className={`w-full h-full object-cover transition-all duration-[2000ms] ease-out ${
                   isTransformed ? 'opacity-0 scale-150' : 'opacity-100 scale-110'
                 }`}
+                priority
               />
               
               {/* Overlay Image (Bold Modern) */}
-              <img
-                src="/images/hero-2.png"
+              <Image
+                src={HeroImage2}
                 alt="Bold modern interior design"
                 className={`absolute inset-0 w-full h-full object-cover transition-all duration-[2000ms] ease-out ${
                   isTransformed ? 'opacity-100 scale-120' : 'opacity-0 scale-95'
                 }`}
+                priority
               />
               
 

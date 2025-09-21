@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
 import { ThemeToggle } from '@/hooks/use-theme';
+import Image from "next/image"
+import Logo2 from "@/public/images/logo2.png"
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,10 +26,11 @@ const Navigation = () => {
           {/* Logo */}
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <img
-                src="/images/logo2.png"
+              <Image
+                src={Logo2}
                 alt="AnnaDecor Logo"
                 className="h-10 w-auto"
+                priority
               />
             </div>
           </div>
@@ -65,8 +68,8 @@ const Navigation = () => {
                 <div className="flex flex-col space-y-8 mt-8">
                   {/* Logo in mobile menu */}
                   <div className="flex items-center space-x-3">
-                    <img
-                      src="/images/logo2.png"
+                    <Image
+                      src={Logo2}
                       alt="AnnaDecor Logo"
                       className="h-8 w-auto"
                     />

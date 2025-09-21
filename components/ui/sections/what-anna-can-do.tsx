@@ -9,6 +9,7 @@ import {
   FileText,
   Sparkles,
 } from "lucide-react";
+import Image from "next/image"
 
 const WhatAnnaCanDo = () => {
   const capabilities = [
@@ -89,7 +90,7 @@ const WhatAnnaCanDo = () => {
             <div key={index} className="flex flex-col items-center group">
               {/* Image Section */}
               <div className="relative w-full max-w-md mx-auto overflow-hidden rounded-lg">
-                <img
+                <Image
                   src={capability.image}
                   alt={capability.title}
                   className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
@@ -99,6 +100,8 @@ const WhatAnnaCanDo = () => {
                     WebkitMaskRepeat: "no-repeat",
                     WebkitMaskSize: "cover",
                   }}
+                  width={200}
+                  height={200}
                 />
                 {/* Gradient Overlay (fades out on hover) */}
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-t from-accent/30 via-primary/30 to-secondary/30 transition-opacity duration-500 group-hover:opacity-0" />
