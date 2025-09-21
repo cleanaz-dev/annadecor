@@ -3,13 +3,7 @@
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  MessageCircle,
-  Lightbulb,
-  FileText,
-  Sparkles,
-} from "lucide-react";
-import Image from "next/image"
+import { MessageCircle, Lightbulb, FileText, Sparkles } from "lucide-react";
 
 const WhatAnnaCanDo = () => {
   const capabilities = [
@@ -68,7 +62,7 @@ const WhatAnnaCanDo = () => {
       id="capabilities"
       className="py-20 bg-gradient-to-br from-primary/5 to-secondary/5"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center space-y-4 mb-16">
           <Badge variant="outline" className="w-fit mx-auto">
@@ -78,66 +72,70 @@ const WhatAnnaCanDo = () => {
             What Anna Can Do For Your Customers
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-            Anna&apos;s voice AI transforms how your customers experience interior
-            design, providing expert guidance and personalized recommendations
-            that drive engagement and sales.
+            Anna&apos;s voice AI transforms how your customers experience
+            interior design, providing expert guidance and personalized
+            recommendations that drive engagement and sales.
           </p>
         </div>
 
-        {/* Capabilities Grid */}
-        <div className="grid lg:grid-cols-2 gap-12 mb-12">
+        {/* Diagonal Staggered Layout */}
+        <div className="space-y-16">
           {capabilities.map((capability, index) => (
-            <div key={index} className="flex flex-col items-center group">
-              {/* Image Section */}
-              <div className="relative w-full max-w-md mx-auto overflow-hidden rounded-lg">
-                <Image
-                  src={capability.image}
-                  alt={capability.title}
-                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
-                  style={{
-                    WebkitMaskImage:
-                      "linear-gradient(to bottom, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
-                    WebkitMaskRepeat: "no-repeat",
-                    WebkitMaskSize: "cover",
-                  }}
-                  width={200}
-                  height={200}
-                />
-                {/* Gradient Overlay (fades out on hover) */}
+            <div
+              key={index}
+              className={`flex flex-col ${
+                index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
+              } items-center gap-8 lg:gap-16`}
+            >
+              {/* Image */}
+              <div className="flex-shrink-0 w-full lg:w-1/2 max-w-md">
+                <div className="relative overflow-hidden rounded-2xl group">
+                  <img
+                    src={capability.image}
+                    alt={capability.title}
+                    className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
+                    style={{
+                      WebkitMaskImage:
+                        "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
+                      maskImage:
+                        "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
+                    }}
+                  />
+     {/* Gradient Overlay (fades out on hover) */}
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-t from-accent/30 via-primary/30 to-secondary/30 transition-opacity duration-500 group-hover:opacity-0" />
+                </div>
               </div>
 
-              {/* Card (text only) */}
-              <Card className="mt-6 hover:shadow-xl transition-all duration-300 bg-background/80 backdrop-blur-sm w-full max-w-md">
-                <CardContent className="p-6 flex flex-col justify-center space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <capability.icon className="w-5 h-5 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-semibold">
-                      {capability.title}
-                    </h3>
-                  </div>
-
-                  <p className="text-muted-foreground text-pretty leading-relaxed">
-                    {capability.description}
-                  </p>
-
-                  <div className="space-y-2">
-                    {capability.benefits.map((benefit, benefitIndex) => (
-                      <div
-                        key={benefitIndex}
-                        className="flex items-center gap-2"
-                      >
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                        <span className="text-sm text-muted-foreground">
-                          {benefit}
-                        </span>
+              {/* Content */}
+              <div className="flex-1 w-full lg:w-1/2">
+                <Card className="border-0 shadow-none bg-transparent">
+                  <CardContent className="p-0 space-y-6">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                        <capability.icon className="w-6 h-6 text-primary" />
                       </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+                      <h3 className="text-2xl lg:text-3xl font-bold">
+                        {capability.title}
+                      </h3>
+                    </div>
+
+                    <p className="text-lg text-muted-foreground leading-relaxed">
+                      {capability.description}
+                    </p>
+
+                    <div className="space-y-3">
+                      {capability.benefits.map((benefit, benefitIndex) => (
+                        <div key={benefitIndex} className="flex items-start gap-3">
+                          <div className="w-2 h-2 rounded-full bg-primary mt-2.5 flex-shrink-0" />
+                          <span className="text-muted-foreground">
+                            {benefit}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           ))}
         </div>
