@@ -123,7 +123,7 @@ const HeroSection = () => {
                 size="sm"
                 variant="ghost"
                 onClick={() => setIsTransformed(!isTransformed)}
-                className="backdrop-blur-sm shadow-lg"
+                className="backdrop-blur-sm shadow-lg text-white"
               >
                 <MdTouchApp className="w-4 h-4 mr-2" />
                 {isTransformed ? 'Change to Calm' : 'Change to Bold'}
