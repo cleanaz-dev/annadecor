@@ -77,7 +77,7 @@ const WhatAnnaCanDo = () => {
             What Anna Can Do For Your Customers
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-            Anna's voice AI transforms how your customers experience interior
+            Anna&apos;s voice AI transforms how your customers experience interior
             design, providing expert guidance and personalized recommendations
             that drive engagement and sales.
           </p>

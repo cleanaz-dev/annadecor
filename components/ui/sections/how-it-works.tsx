@@ -48,7 +48,7 @@ const HowItWorks = () => {
             How Anna Works With Your Customers
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
-            Anna's seamless voice-to-purchase flow turns casual inquiries into 
+            Anna&apos;s seamless voice-to-purchase flow turns casual inquiries into 
             qualified leads and sales conversions.
           </p>
         </div>

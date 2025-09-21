@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, Home, Star, Sparkles } from 'lucide-react';
+import { ArrowRight, Home, Star } from 'lucide-react';
 import { MdTouchApp } from "react-icons/md";
 
 const HeroSection = () => {

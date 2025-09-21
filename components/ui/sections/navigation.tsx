@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, X } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { ThemeToggle } from '@/hooks/use-theme';
 
 const Navigation = () => {
@@ -61,6 +61,7 @@ const Navigation = () => {
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="w-[300px] sm:w-[400px]">
+                <SheetTitle>Menu</SheetTitle>
                 <div className="flex flex-col space-y-8 mt-8">
                   {/* Logo in mobile menu */}
                   <div className="flex items-center space-x-3">

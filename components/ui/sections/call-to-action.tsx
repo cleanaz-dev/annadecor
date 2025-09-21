@@ -13,7 +13,7 @@ const CTABanner = () => {
             Ready to Transform Your Customer Experience?
           </h2>
           <p className="text-xl opacity-90 max-w-2xl mx-auto text-pretty">
-            See how Anna's voice AI can boost engagement, increase conversions, 
+            See how Anna&apos;s voice AI can boost engagement, increase conversions, 
             and revolutionize how your customers design their perfect space.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
