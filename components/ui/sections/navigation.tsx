@@ -25,7 +25,7 @@ const Navigation = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="flex-shrink-0">
+            <div className="flex ">
               <Image
                 src={Logo2}
                 alt="AnnaDecor Logo"
@@ -54,8 +54,9 @@ const Navigation = () => {
             </div>
           </div>
 
-          {/* Mobile Navigation */}
-          <div className="md:hidden">
+          {/* Mobile Navigation - Theme Toggle always visible */}
+          <div className="md:hidden flex items-center space-x-2">
+            <ThemeToggle />
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="sm" className="p-2">
@@ -100,11 +101,6 @@ const Navigation = () => {
                     >
                       Schedule Demo
                     </Button>
-                  </div>
-
-                  {/* Theme Toggle */}
-                  <div className="flex justify-center">
-                    <ThemeToggle />
                   </div>
 
                   {/* Contact Info */}

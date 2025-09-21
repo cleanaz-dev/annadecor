@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, Home, Star } from 'lucide-react';
+import { ArrowDown, ArrowRight, Home, Star } from 'lucide-react';
 import { MdTouchApp } from "react-icons/md";
 import Image from 'next/image';
 import HeroImage1 from "@/public/images/hero-1.png"
@@ -48,16 +48,10 @@ const HeroSection = () => {
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button size="lg" className="text-lg px-8">
-                Start Your Project
-                <ArrowRight className="ml-2 h-5 w-5" />
+                Learn More
+                <ArrowDown className="ml-2 h-5 w-5 animate-bounce" />
               </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="text-lg px-8 bg-transparent"
-              >
-                View Portfolio
-              </Button>
+              
             </div>
             <div className="hidden md:flex items-center gap-6 pt-4">
               <div className="flex items-center gap-2">
