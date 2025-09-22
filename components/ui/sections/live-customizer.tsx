@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Badge } from "../badge";
 import Image, { StaticImageData } from "next/image";
 import DresserImage from "@/public/images/render-d-min.png";
@@ -28,6 +28,7 @@ const RoomCustomizer: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
    const [imagesLoaded, setImagesLoaded] = useState<boolean>(false);
+   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Mock furniture items
   const furnitureItems: FurnitureItem[] = [
@@ -115,6 +116,8 @@ const RoomCustomizer: React.FC = () => {
 
   const isSelected = (itemId: string): boolean => selectedItem === itemId;
 
+  
+
   return (
     <section id="studio" className="container mx-auto max-w-4xl py-8 md:py-16 p-6 ">
       <header className="text-center space-y-4 mb-8">
@@ -176,6 +179,7 @@ const RoomCustomizer: React.FC = () => {
                 loop
                 playsInline
                 preload="auto"
+                poster="/images/splash-screen-poster.png"
                 className="w-32 h-32 md:w-40 md:h-40 object-contain rounded-full"
               >
                 <source src="/videos/splash-screen.webm" type="video/webm" />
@@ -195,6 +199,7 @@ const RoomCustomizer: React.FC = () => {
           height={400}
           priority
           placeholder="blur"
+          
         />
       </div>
 
