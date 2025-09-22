@@ -1,19 +1,31 @@
 "use client";
 import { useState } from "react";
 import { Badge } from "../badge";
+import Image, { StaticImageData } from "next/image";
+import DresserImage from '@/public/images/render-d-min.png'
+import BedImage from "@/public/images/render-b-min.png"
+import MirrorImage from "@/public/images/render-m-min.png"
+import ChairImage from "@/public/images/render-c-min.png"
+import MainDecorImage from '@/public/images/render-main-0-min.png'
+
+// Import room combination images - same room with different single furniture pieces
+import RoomBedImage from "@/public/images/render-main-b-min.png"
+import RoomDresserImage from "@/public/images/render-main-d-min.png"
+import RoomMirrorImage from "@/public/images/render-main-m-min.png"
+import RoomChairImage from "@/public/images/render-main-c-min.png"
 
 interface FurnitureItem {
   id: string;
   name: string;
-  thumbnail: string;
+  thumbnail: StaticImageData;
 }
 
 interface RoomCombinations {
-  [key: string]: string;
+  [key: string]: StaticImageData;
 }
 
 const RoomCustomizer: React.FC = () => {
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
 
   // Mock furniture items
@@ -21,51 +33,40 @@ const RoomCustomizer: React.FC = () => {
     {
       id: "bed",
       name: "Modern Bed",
-      thumbnail:
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=150&h=150&fit=crop&crop=center",
+      thumbnail: BedImage
     },
     {
       id: "dresser",
       name: "Wooden Dresser",
-      thumbnail:
-        "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=150&h=150&fit=crop&crop=center",
+      thumbnail: DresserImage
     },
     {
       id: "mirror",
       name: "Wall Mirror",
-      thumbnail:
-        "https://images.unsplash.com/photo-1618220179428-22790b461013?w=150&h=150&fit=crop&crop=center",
+      thumbnail: MirrorImage
     },
     {
       id: "chair",
       name: "Accent Chair",
-      thumbnail:
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=150&h=150&fit=crop&crop=center",
+      thumbnail: ChairImage
     },
   ];
 
-  // Mock room images based on selected items
-  const getRoomImage = (): string => {
-    if (selectedItems.length === 0) {
-      return "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=600&h=400&fit=crop&crop=center";
+  // Room images for single item selection
+  const roomCombinations: RoomCombinations = {
+    "bed": RoomBedImage,
+    "chair": RoomChairImage,
+    "dresser": RoomDresserImage,
+    "mirror": RoomMirrorImage,
+  };
+
+  // Get room image based on selected item
+  const getRoomImage = (): StaticImageData => {
+    if (!selectedItem) {
+      return MainDecorImage;
     }
-
-    // In a real app, you'd have actual different room combinations
-    const combinations: RoomCombinations = {
-      bed: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=600&h=400&fit=crop&crop=center",
-      "bed,dresser":
-        "https://images.unsplash.com/photo-1616137466211-f939a420be84?w=600&h=400&fit=crop&crop=center",
-      "bed,mirror":
-        "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=600&h=400&fit=crop&crop=center",
-      "bed,dresser,mirror":
-        "https://images.unsplash.com/photo-1616137466211-f939a420be84?w=600&h=400&fit=crop&crop=center",
-    };
-
-    const key = selectedItems.sort().join(",");
-    return (
-      combinations[key] ||
-      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=600&h=400&fit=crop&crop=center"
-    );
+    
+    return roomCombinations[selectedItem] || MainDecorImage;
   };
 
   const toggleItem = async (itemId: string): Promise<void> => {
@@ -73,19 +74,21 @@ const RoomCustomizer: React.FC = () => {
 
     // Simulate 2 second generation time
     setTimeout(() => {
-      setSelectedItems((prev) => {
-        if (prev.includes(itemId)) {
-          return prev.filter((id) => id !== itemId);
+      setSelectedItem((prev) => {
+        // If clicking the same item, deselect it
+        if (prev === itemId) {
+          return null;
         } else {
-          return [...prev, itemId];
+          // Otherwise select the new item
+          return itemId;
         }
       });
       setIsGenerating(false);
-    }, 2000);
+    }, 1750);
   };
 
   const isSelected = (itemId: string): boolean =>
-    selectedItems.includes(itemId);
+    selectedItem === itemId;
 
   return (
     <div className="container mx-auto max-w-4xl py-8 md:py-16 p-6 ">
@@ -118,25 +121,19 @@ const RoomCustomizer: React.FC = () => {
           </div>
         )}
 
-        <img
+        <Image
           src={getRoomImage()}
           alt="Room preview"
-          className="w-full h-96 object-cover"
+          className="w-full h-auto object-cover"
+          width={600}
+          height={400}
+          priority
+          placeholder="blur"
         />
-
-        {/* Selected items indicator */}
-        {selectedItems.length > 0 && !isGenerating && (
-          <div className="absolute top-4 left-4 bg-card/90 px-3 py-2 rounded-lg shadow border">
-            <span className="text-sm font-medium text-muted-foreground">
-              {selectedItems.length} item{selectedItems.length > 1 ? "s" : ""}{" "}
-              added
-            </span>
-          </div>
-        )}
       </div>
 
       {/* Selection Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
         {furnitureItems.map((item) => (
           <div
             key={item.id}
@@ -151,10 +148,14 @@ const RoomCustomizer: React.FC = () => {
               ${isGenerating ? "opacity-50 cursor-wait" : ""}
             `}
           >
-            <img
+            <Image
               src={item.thumbnail}
               alt={item.name}
               className="w-full h-32 object-cover"
+              width={200}
+              height={128}
+              priority
+              placeholder="blur"
             />
 
             {/* Selection overlay */}
@@ -177,7 +178,7 @@ const RoomCustomizer: React.FC = () => {
             )}
 
             <div className="absolute bottom-0 left-0 right-0 bg-background/80 backdrop-blur-sm text-foreground p-2">
-              <h3 className="text-sm font-medium truncate">{item.name}</h3>
+              <h3 className="text-xs font-medium truncate">{item.name}</h3>
             </div>
           </div>
         ))}
@@ -186,11 +187,7 @@ const RoomCustomizer: React.FC = () => {
       {/* Instructions */}
       <div className="mt-8 text-center">
         <p className="text-muted-foreground">
-          Click on furniture items to add or remove them from your room design
-        </p>
-        <p className="text-sm text-muted-foreground mt-1">
-          Selected items:{" "}
-          {selectedItems.length > 0 ? selectedItems.join(", ") : "None"}
+          Click on a furniture item to see it in the room design
         </p>
       </div>
     </div>
