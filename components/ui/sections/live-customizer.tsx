@@ -100,7 +100,7 @@ const RoomCustomizer: React.FC = () => {
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
           Transform your space with AI-powered design. Select furniture pieces
-          below to instantly visualize how they'll look in your room. Mix and
+          below to instantly visualize how they&apos;ll look in your room. Mix and
           match items to create the perfect interior that reflects your style.
         </p>
       </header>

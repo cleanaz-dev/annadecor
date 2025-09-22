@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowDown, ArrowRight, Home, Star } from 'lucide-react';
+import { ArrowDown, Home, Star } from 'lucide-react';
 import { MdTouchApp } from "react-icons/md";
 import Image from 'next/image';
 import HeroImage1 from "@/public/images/hero-1.png"

@@ -4,6 +4,7 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { MessageCircle, Lightbulb, FileText, Sparkles } from "lucide-react";
+import Image from "next/image"
 
 const WhatAnnaCanDo = () => {
   const capabilities = [
@@ -90,7 +91,7 @@ const WhatAnnaCanDo = () => {
               {/* Image */}
               <div className="flex-shrink-0 w-full lg:w-1/2 max-w-md">
                 <div className="relative overflow-hidden rounded-2xl group ">
-                  <img
+                  <Image
                     src={capability.image}
                     alt={capability.title}
                     className="w-full h-80 object-cover transition-transform duration-1000 group-hover:scale-125 "
@@ -100,6 +101,8 @@ const WhatAnnaCanDo = () => {
                       maskImage:
                         "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
                     }}
+                    width={500}
+                    height={500}
                   />
      {/* Gradient Overlay (fades out on hover) */}
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-t from-accent/30 via-primary/30 to-secondary/30 transition-opacity duration-500 group-hover:opacity-0" />
