@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Badge } from "../badge";
 import Image, { StaticImageData } from "next/image";
 import DresserImage from "@/public/images/render-d-min.png";
@@ -27,6 +27,7 @@ interface RoomCombinations {
 const RoomCustomizer: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
+   const [imagesLoaded, setImagesLoaded] = useState<boolean>(false);
 
   // Mock furniture items
   const furnitureItems: FurnitureItem[] = [
@@ -59,6 +60,31 @@ const RoomCustomizer: React.FC = () => {
     dresser: RoomDresserImage,
     mirror: RoomMirrorImage,
   };
+
+    // Preload all images on component mount
+  useEffect(() => {
+    const preloadImages = async () => {
+      const allImages = [
+        MainDecorImage,
+        ...furnitureItems.map(item => item.thumbnail),
+        ...Object.values(roomCombinations)
+      ];
+
+      const imagePromises = allImages.map((imageSrc) => {
+        return new Promise<void>((resolve) => {
+          const img = new window.Image();
+          img.onload = () => resolve();
+          img.onerror = () => resolve(); // Still resolve on error to not block
+          img.src = imageSrc.src;
+        });
+      });
+
+      await Promise.all(imagePromises);
+      setImagesLoaded(true);
+    };
+
+    preloadImages();
+  }, []);
 
   // Get room image based on selected item
   const getRoomImage = (): StaticImageData => {
@@ -149,9 +175,10 @@ const RoomCustomizer: React.FC = () => {
                 muted
                 loop
                 playsInline
+                preload="auto"
                 className="w-32 h-32 md:w-40 md:h-40 object-contain rounded-full"
               >
-                <source src="/videos/splash-screen.mp4" type="video/mp4" />
+                <source src="/videos/splash-screen.webm" type="video/webm" />
               </video>
               <span className="text-foreground font-medium text-center">
                 Anna is designing your space...
