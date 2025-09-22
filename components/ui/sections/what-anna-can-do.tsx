@@ -4,7 +4,8 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { MessageCircle, Lightbulb, FileText, Sparkles } from "lucide-react";
-import Image from "next/image"
+import Image from "next/image";
+import { motion } from "framer-motion";
 
 const WhatAnnaCanDo = () => {
   const capabilities = [
@@ -85,28 +86,41 @@ const WhatAnnaCanDo = () => {
             <div
               key={index}
               className={`flex flex-col ${
-                index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
+                index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
               } items-center gap-8 lg:gap-16`}
             >
-              {/* Image */}
-              <div className="flex-shrink-0 w-full lg:w-1/2 max-w-md">
-                <div className="relative overflow-hidden rounded-2xl group ">
+              {/* Image with scroll-in/out animation */}
+              <div className="flex-shrink-0 w-full lg:w-1/2 max-w-md relative overflow-hidden rounded-2xl">
+                <motion.div
+                  initial={{ scale: 1 }}
+                  whileInView={{ scale: 1.1 }}
+                  viewport={{ amount: 0.1 }} // triggers when ~40% visible
+                  transition={{ duration: 1, ease: "easeOut" }}
+                  className="relative"
+                >
                   <Image
                     src={capability.image}
                     alt={capability.title}
-                    className="w-full h-80 object-cover transition-transform duration-1000 group-hover:scale-125 "
+                    className="w-full h-80 object-cover"
+                    width={500}
+                    height={500}
                     style={{
                       WebkitMaskImage:
                         "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
                       maskImage:
                         "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
                     }}
-                    width={500}
-                    height={500}
                   />
-     {/* Gradient Overlay (fades out on hover) */}
-                <div className="absolute inset-0 rounded-lg bg-gradient-to-t from-accent/30 via-primary/30 to-secondary/30 transition-opacity duration-500 group-hover:opacity-0" />
-                </div>
+
+                  {/* Gradient Overlay follows scroll */}
+                  <motion.div
+                    initial={{ opacity: 1 }}
+                    whileInView={{ opacity: 0 }}
+                    viewport={{ amount: 0.4 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="absolute inset-0 rounded-lg bg-gradient-to-t from-accent/30 via-primary/30 to-secondary/30"
+                  />
+                </motion.div>
               </div>
 
               {/* Content */}
@@ -122,13 +136,16 @@ const WhatAnnaCanDo = () => {
                       </h3>
                     </div>
 
-                    <p className="text-lg  leading-relaxed">
+                    <p className="text-lg leading-relaxed">
                       {capability.description}
                     </p>
 
                     <div className="space-y-3">
                       {capability.benefits.map((benefit, benefitIndex) => (
-                        <div key={benefitIndex} className="flex items-start gap-3">
+                        <div
+                          key={benefitIndex}
+                          className="flex items-start gap-3"
+                        >
                           <div className="w-2 h-2 rounded-full bg-primary mt-2.5 flex-shrink-0" />
                           <span className="text-muted-foreground">
                             {benefit}
