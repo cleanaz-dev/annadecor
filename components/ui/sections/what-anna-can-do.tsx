@@ -119,7 +119,7 @@ const WhatAnnaCanDo = () => {
                       </h3>
                     </div>
 
-                    <p className="text-lg text-muted-foreground leading-relaxed">
+                    <p className="text-lg  leading-relaxed">
                       {capability.description}
                     </p>
 

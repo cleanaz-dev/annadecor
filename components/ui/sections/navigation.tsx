@@ -7,6 +7,7 @@ import { Menu } from 'lucide-react';
 import { ThemeToggle } from '@/hooks/use-theme';
 import Image from "next/image"
 import Logo2 from "@/public/images/logo2.png"
+import { aluminiSans } from '@/lib/fonts';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,16 +25,16 @@ const Navigation = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex items-center">
-            <div className="flex ">
+       
+            <div className="flex gap-2 ">
               <Image
                 src={Logo2}
                 alt="AnnaDecor Logo"
                 className="h-10 w-auto"
                 priority
               />
+              <p className={`hidden md:block self-end  text-3xl pt-2 text-primary font-semibold tracking-wide ${aluminiSans.className}`}>AnnaDecor</p>
             </div>
-          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">

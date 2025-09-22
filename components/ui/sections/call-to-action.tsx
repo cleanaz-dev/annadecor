@@ -17,18 +17,15 @@ const CTABanner = () => {
             and revolutionize how your customers design their perfect space.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="text-lg px-8">
+           <Button
+              size="lg"
+              variant="outline"
+              className="text-lg px-8 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent duration-300 transition-all"
+            >
               Schedule a Demo
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="text-lg px-8 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent"
-            >
-              <Phone className="mr-2 h-5 w-5" />
-              Call Sales: (555) 123-4567
-            </Button>
+         
           </div>
         </div>
       </div>

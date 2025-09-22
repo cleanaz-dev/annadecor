@@ -47,9 +47,12 @@ const HeroSection = () => {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="text-lg px-8">
+              <Button size="lg" className="text-lg px-8 md:w-48">
                 Learn More
                 <ArrowDown className="ml-2 h-5 w-5 animate-bounce" />
+              </Button>
+              <Button size="lg" variant="outline" className='text-lg px-8 md:w-48'>
+                Schedule Demo
               </Button>
               
             </div>

@@ -68,7 +68,7 @@ const HowItWorks = () => {
                     <item.icon className="w-6 h-6 text-primary" />
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold">{item.title}</h3>
+                <h3 className="text-xl font-semibold decoration-accent underline">{item.title}</h3>
                 <p className="text-muted-foreground text-pretty">
                   {item.description}
                 </p>

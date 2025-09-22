@@ -5,6 +5,7 @@ import WhatAnnaCanDo from "@/components/ui/sections/what-anna-can-do";
 import CTABanner from "@/components/ui/sections/call-to-action";
 import Footer from "@/components/ui/sections/footer";
 import Navigation from "@/components/ui/sections/navigation";
+import RoomCustomizer from "@/components/ui/sections/live-customizer";
 
 export default function AnnaDecorLanding() {
   return (
@@ -14,6 +15,7 @@ export default function AnnaDecorLanding() {
       <HeroSection />
       <HowItWorks />
       <WhatAnnaCanDo />
+      <RoomCustomizer />
       <CTABanner />
       <Footer />
     </div>
