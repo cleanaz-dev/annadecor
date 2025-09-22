@@ -66,10 +66,10 @@ const Navigation = () => {
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="w-[300px] sm:w-[400px]">
-                <SheetTitle>Menu</SheetTitle>
+                <SheetTitle className='ml-2 pt-2'>Menu</SheetTitle>
                 <div className="flex flex-col space-y-8 mt-8">
                   {/* Logo in mobile menu */}
-                  <div className="flex items-center space-x-3">
+                  <div className="flex items-center space-x-3 ml-2">
                     <Image
                       src={Logo2}
                       alt="AnnaDecor Logo"
@@ -93,7 +93,7 @@ const Navigation = () => {
                   </div>
 
                   {/* CTA Button */}
-                  <div className="pt-4 border-t border-border">
+                  <div className="px-4 pt-4 border-t border-border">
                     <Button 
                       variant="default" 
                       size="lg" 
@@ -104,24 +104,6 @@ const Navigation = () => {
                     </Button>
                   </div>
 
-                  {/* Contact Info */}
-                  <div className="pt-4 space-y-3 text-sm text-muted-foreground">
-                    <p>Ready to get started?</p>
-                    <div className="space-y-2">
-                      <a 
-                        href="mailto:hello@annadecor.com"
-                        className="block hover:text-primary transition-colors"
-                      >
-                        hello@annadecor.com
-                      </a>
-                      <a 
-                        href="tel:5551234567"
-                        className="block hover:text-primary transition-colors"
-                      >
-                        (555) 123-4567
-                      </a>
-                    </div>
-                  </div>
                 </div>
               </SheetContent>
             </Sheet>

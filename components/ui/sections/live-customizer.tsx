@@ -2,17 +2,17 @@
 import { useState } from "react";
 import { Badge } from "../badge";
 import Image, { StaticImageData } from "next/image";
-import DresserImage from '@/public/images/render-d-min.png'
-import BedImage from "@/public/images/render-b-min.png"
-import MirrorImage from "@/public/images/render-m-min.png"
-import ChairImage from "@/public/images/render-c-min.png"
-import MainDecorImage from '@/public/images/render-main-0-min.png'
+import DresserImage from "@/public/images/render-d-min.png";
+import BedImage from "@/public/images/render-b-min.png";
+import MirrorImage from "@/public/images/render-m-min.png";
+import ChairImage from "@/public/images/render-c-min.png";
+import MainDecorImage from "@/public/images/render-main-0-min.png";
 
 // Import room combination images - same room with different single furniture pieces
-import RoomBedImage from "@/public/images/render-main-b-min.png"
-import RoomDresserImage from "@/public/images/render-main-d-min.png"
-import RoomMirrorImage from "@/public/images/render-main-m-min.png"
-import RoomChairImage from "@/public/images/render-main-c-min.png"
+import RoomBedImage from "@/public/images/render-main-b-min.png";
+import RoomDresserImage from "@/public/images/render-main-d-min.png";
+import RoomMirrorImage from "@/public/images/render-main-m-min.png";
+import RoomChairImage from "@/public/images/render-main-c-min.png";
 
 interface FurnitureItem {
   id: string;
@@ -33,31 +33,31 @@ const RoomCustomizer: React.FC = () => {
     {
       id: "bed",
       name: "Modern Bed",
-      thumbnail: BedImage
+      thumbnail: BedImage,
     },
     {
       id: "dresser",
       name: "Wooden Dresser",
-      thumbnail: DresserImage
+      thumbnail: DresserImage,
     },
     {
       id: "mirror",
       name: "Wall Mirror",
-      thumbnail: MirrorImage
+      thumbnail: MirrorImage,
     },
     {
       id: "chair",
       name: "Accent Chair",
-      thumbnail: ChairImage
+      thumbnail: ChairImage,
     },
   ];
 
   // Room images for single item selection
   const roomCombinations: RoomCombinations = {
-    "bed": RoomBedImage,
-    "chair": RoomChairImage,
-    "dresser": RoomDresserImage,
-    "mirror": RoomMirrorImage,
+    bed: RoomBedImage,
+    chair: RoomChairImage,
+    dresser: RoomDresserImage,
+    mirror: RoomMirrorImage,
   };
 
   // Get room image based on selected item
@@ -65,7 +65,7 @@ const RoomCustomizer: React.FC = () => {
     if (!selectedItem) {
       return MainDecorImage;
     }
-    
+
     return roomCombinations[selectedItem] || MainDecorImage;
   };
 
@@ -87,17 +87,16 @@ const RoomCustomizer: React.FC = () => {
     }, 1750);
   };
 
-  const isSelected = (itemId: string): boolean =>
-    selectedItem === itemId;
+  const isSelected = (itemId: string): boolean => selectedItem === itemId;
 
   return (
-    <div className="container mx-auto max-w-4xl py-8 md:py-16 p-6 ">
+    <section id="studio" className="container mx-auto max-w-4xl py-8 md:py-16 p-6 ">
       <header className="text-center space-y-4 mb-8">
         <Badge variant="secondary" className="w-fit">
           Premium Interior Design
         </Badge>
         <h1 className="text-5xl font-bold  text-foreground">
-          AnnaDecor Remodeling Studio
+          Remodeling Studio
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
           Transform your space with AI-powered design. Select furniture pieces
@@ -108,15 +107,55 @@ const RoomCustomizer: React.FC = () => {
 
       {/* Main Image Display */}
       <div className="relative mb-8 rounded-lg overflow-hidden shadow-lg bg-muted/20">
+        {/* Progress Bar - appears at top of image when generating */}
         {isGenerating && (
-          <div className="absolute inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-10">
-            <div className="bg-card px-6 py-4 rounded-lg shadow-lg border">
-              <div className="flex items-center space-x-3">
-                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
-                <span className="text-foreground font-medium">
-                  Generating your design...
-                </span>
-              </div>
+          <div className="absolute top-0 left-0 right-0 z-30 ">
+            <div className="w-full h-0.5 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-primary to-secondary rounded-full animate-pulse"
+                style={{
+                  width: "0%",
+                  animation: "progress-fill 1.75s linear forwards",
+                }}
+              ></div>
+            </div>
+            <style jsx>{`
+              @keyframes progress-fill {
+                from {
+                  width: 0%;
+                }
+                to {
+                  width: 100%;
+                }
+              }
+            `}</style>
+          </div>
+        )}
+
+        {isGenerating && (
+          <div className="absolute inset-0 backdrop-blur-sm flex items-center justify-center z-10">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-purple-400/10 to-amber-400/20 animate-pulse"></div>
+            <div
+              className="absolute inset-0 bg-gradient-to-r from-purple-500/30 to-amber-500/30 animate-pulse"
+              style={{ animationDelay: "0.5s" }}
+            ></div>
+            <div
+              className="absolute inset-0 bg-gradient-to-bl from-transparent via-purple-300/20 to-transparent animate-pulse"
+              style={{ animationDelay: "1s" }}
+            ></div>
+            <div className="flex flex-col items-center space-y-4 relative z-20">
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-32 h-32 md:w-40 md:h-40 object-contain rounded-full"
+              >
+                <source src="/videos/splash-screen.mp4" type="video/mp4" />
+              </video>
+              <span className="text-foreground font-medium text-center">
+                Anna is designing your space...
+              </span>
             </div>
           </div>
         )}
@@ -190,7 +229,7 @@ const RoomCustomizer: React.FC = () => {
           Click on a furniture item to see it in the room design
         </p>
       </div>
-    </div>
+    </section>
   );
 };
 
